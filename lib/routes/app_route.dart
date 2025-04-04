@@ -13,11 +13,11 @@ import '../view/screens/tips/tips_screen.dart';
 List<GetPage> appRoute = [
   GetPage(name: '/', page: () => const SplashScreen()),
   GetPage(name: '/mobile-no', page: () => const MobileNoScreen()),
-  GetPage(name: '/onboarding', page: () => OnBoarding()),
+  GetPage(name: '/onboarding', page: () => const OnBoarding()),
   GetPage(name: '/otp', page: () => const OtpScreen()),
   GetPage(name: '/registration', page: () => RegistrationScreen()),
   GetPage(name: '/fregment', page: () => FregmentScreen()),
-  GetPage(name: '/tips', page: () => TipsScreen()),
-  GetPage(name: '/chat-partcipents', page: () => ChatParticipents()),
-  GetPage(name: '/followers', page: () => FollowersScreen()),
+  GetPage(name: '/tips', page: () => const TipsScreen()),
+  GetPage(name: '/chat-partcipents', page: () => const ChatParticipents()),
+  GetPage(name: '/followers', page: () => const FollowersScreen()),
 ];
