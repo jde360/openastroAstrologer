@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:open_astro/service/svg_provider.dart';
 
 import '../../../service/image_provider.dart';
 
