@@ -1,4 +1,4 @@
-# astrologer
+# example
 
 A new Flutter project.
 
