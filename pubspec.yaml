@@ -11,15 +11,16 @@ dependencies:
     
   cupertino_icons: ^1.0.8
   dio: ^5.7.0 # http client
-  pretty_dio_logger: ^1.4.0 #intercepter
-  pinput: ^5.0.0 #otp 
   flutter_svg: ^2.0.16 # svg provider
   flutter_screenutil: ^5.9.3 #adaptive
   flutter_native_splash: ^2.4.4 # splash screen
   get: ^4.6.6 # state management
-  video_player: ^2.9.2 # video player
+  image_picker: ^1.1.2 #image picker
+  pretty_dio_logger: ^1.4.0 #intercepter
+  pinput: ^5.0.0 #otp 
   share_plus: ^10.0.0 # share plus
   shared_preferences: ^2.5.3 # local storage
+  video_player: ^2.9.2 # video player
 
 dev_dependencies:
   flutter_test:

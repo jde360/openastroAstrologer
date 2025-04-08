@@ -9,11 +9,12 @@ class AppPrimaryButton extends StatelessWidget {
   final Function onClicked;
   final bool isLoading;
 
-  const AppPrimaryButton(
-      {super.key,
-      required this.text,
-      required this.onClicked,
-      required this.isLoading});
+  const AppPrimaryButton({
+    super.key,
+    required this.text,
+    required this.onClicked,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +29,23 @@ class AppPrimaryButton extends StatelessWidget {
             appText(size: 15, weight: FontWeight.w600),
           ),
           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(3.h),
-            ),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.h)),
           ),
         ),
         onPressed: () {
           isLoading ? null : onClicked();
         },
-        child: isLoading
-            ? CircularProgressIndicator(
-                color: AppColor().bg,
-              )
-            : Text(text),
+        child:
+            isLoading
+                ? SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    color: AppColor().bg,
+                    strokeWidth: 2,
+                  ),
+                )
+                : Text(text),
       ),
     );
   }
