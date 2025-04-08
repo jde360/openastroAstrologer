@@ -7,21 +7,20 @@ class AppImageProvider {
     Color? color,
     int? height,
     int? width,
-  }) =>
-      Image.asset(
-        'assets/images/$asset.png',
-        color: color,
-        height: height?.h,
-        width: width?.w,
-      );
+  }) => Image.asset(
+    'assets/images/$asset.png',
+    color: color,
+    height: height?.h,
+    width: width?.w,
+    fit: BoxFit.fill,
+  );
 
-  static Image network(Color color, int height, int width,
-      {required String url}) {
-    return Image.asset(
-      url,
-      color: color,
-      height: height.h,
-      width: width.w,
-    );
+  static Image network(
+    Color color,
+    int height,
+    int width, {
+    required String url,
+  }) {
+    return Image.asset(url, color: color, height: height.h, width: width.w);
   }
 }
