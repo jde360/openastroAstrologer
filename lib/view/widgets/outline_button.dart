@@ -9,11 +9,12 @@ class OutlineButton extends StatelessWidget {
   final bool isLoading;
   final Function onClicked;
 
-  const OutlineButton(
-      {super.key,
-      required this.text,
-      required this.onClicked,
-      required this.isLoading});
+  const OutlineButton({
+    super.key,
+    required this.text,
+    required this.onClicked,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +24,14 @@ class OutlineButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.h),
         border: Border.all(
-          color: AppColor().textColor.withOpacity(0.5),
+          color: AppColor().textColor.withValues(alpha: 0.5),
           width: 1.w,
         ),
       ),
-      child: isLoading
-          ? CircularProgressIndicator(
-              color: AppColor().textColor,
-            )
-          : Text(
-              text,
-              style: appText(size: 15, weight: FontWeight.w600),
-            ),
+      child:
+          isLoading
+              ? CircularProgressIndicator(color: AppColor().textColor)
+              : Text(text, style: appText(size: 15, weight: FontWeight.w600)),
     );
   }
 }

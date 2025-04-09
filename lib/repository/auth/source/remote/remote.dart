@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:open_astro/core/network/http_client.dart';
 import 'package:open_astro/model/opt_verification_model.dart';
-import 'package:open_astro/service/local_storage.dart';
 
 import '../../../../core/error/error.dart';
 
@@ -9,7 +8,6 @@ class AuthRemoteDataSource {
   final API api;
   AuthRemoteDataSource({required this.api});
 
-  final LocalStorage _localStorage = LocalStorage();
   // final API _api = API();
   Future<bool> getOTP({required Map body}) async {
     try {

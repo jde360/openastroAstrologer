@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:open_astro/core/colors/color_pallet.dart';
 import 'package:open_astro/core/error/error.dart';
 import 'package:open_astro/core/error/error_handelar.dart';
-import 'package:open_astro/service/app_loger.dart';
 import 'package:open_astro/service/local_storage.dart';
 import 'package:pinput/pinput.dart';
 
@@ -111,7 +109,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       highlightColor: Colors.transparent,
 
                       onTap: () {
-                        _resendOTP();
+                        // _resendOTP();
                       },
                       child: Text(
                         'Resend OTP',
@@ -138,20 +136,18 @@ class _OtpScreenState extends State<OtpScreen> {
     });
   }
 
-  Future<void> _resendOTP() async {
-    try {} catch (e) {}
-  }
+  // Future<void> _resendOTP() async {
+  //   try {} catch (e) {}
+  // }
 
   Future<void> _verifyOTP() async {
     try {
-      bool isLatest = await _localStorage.getlatestStatus();
       OTPVerificationModel res = await _authController.verifyOTP(
         mobileNo: '${Get.arguments['mobileNo']}',
         OTP: _otpController.text,
         fcm: '',
       );
 
-      print("response token ${res.latest}");
       _localStorage.setToken(token: res.token!);
       await _localStorage.setLatest(res.latest);
 

@@ -22,7 +22,6 @@ class HoroscopeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    print("puja sample $listOfPuja");
     await getPujas();
     getSpecilizations();
   }

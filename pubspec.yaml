@@ -14,6 +14,7 @@ dependencies:
   flutter_svg: ^2.0.16 # svg provider
   flutter_screenutil: ^5.9.3 #adaptive
   flutter_native_splash: ^2.4.4 # splash screen
+  flutter_rating: ^2.0.2 #rating star
   get: ^4.6.6 # state management
   image_picker: ^1.1.2 #image picker
   pretty_dio_logger: ^1.4.0 #intercepter

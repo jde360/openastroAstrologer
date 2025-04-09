@@ -3,6 +3,8 @@ import 'package:open_astro/view/ui_helper/ui_helper.dart';
 
 import '../../../../service/image_provider.dart';
 import '../screens/info.dart';
+import '../screens/review.dart';
+import '../screens/tips.dart';
 
 class CustomTabs extends StatelessWidget {
   const CustomTabs({super.key});
@@ -10,7 +12,7 @@ class CustomTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 3,
       child: Scaffold(
         body: Column(
@@ -56,9 +58,9 @@ class CustomTabs extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(
-                children: [InfoScreen(), Text("Reels"), Text("Review")],
+                children: [InfoScreen(), TipsScreen(), ReviewScreen()],
               ),
             ),
           ],

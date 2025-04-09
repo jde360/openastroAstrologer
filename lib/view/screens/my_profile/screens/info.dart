@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:open_astro/view/screens/my_profile/screens/review.dart';
 import 'package:open_astro/view/screens/my_profile/widgets/specialization_card.dart';
 
-import '../../../../core/colors/color_pallet.dart';
 import '../../../../core/font/app_font.dart';
-import '../../../../service/image_provider.dart';
 import '../../../widgets/space.dart';
 import '../../navigation/widgets/video_card_widget.dart';
+import '../widgets/featured.dart';
+import 'package:get/get.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
@@ -19,6 +20,7 @@ class InfoScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          space(height: 21, width: 0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -26,17 +28,35 @@ class InfoScreen extends StatelessWidget {
                 'Specialization',
                 style: appText(size: 18, weight: FontWeight.w600),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+              SizedBox(
+                height: 20,
+                width: 40,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    padding: const EdgeInsets.all(0),
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Get.toNamed('/edit-profile');
+                  },
+                  child: Text(
+                    "Edit",
+                    style: appText(size: 8, weight: FontWeight.w600),
+                  ),
+                ),
               ),
             ],
           ),
-          SizedBox(
+          space(height: 22, width: 0),
+          const SizedBox(
             width: double.infinity,
             child: Wrap(
-              spacing: 5,
-              runSpacing: 10,
+              spacing: 8,
+              runSpacing: 9,
               children: [
                 SpecializationCard(),
                 SpecializationCard(),
@@ -47,7 +67,7 @@ class InfoScreen extends StatelessWidget {
               ],
             ),
           ),
-          space(height: 25, width: 0),
+          space(height: 22, width: 0),
 
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -57,45 +77,20 @@ class InfoScreen extends StatelessWidget {
                 'Description',
                 style: appText(size: 18, weight: FontWeight.w600),
               ),
-              space(height: 5, width: 0),
+              space(height: 12, width: 0),
               Text(
                 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
                 style: appText(size: 14, weight: FontWeight.w400),
               ),
             ],
           ),
-          space(height: 25, width: 0),
-
-          Text('Featured', style: appText(size: 18, weight: FontWeight.w600)),
-          space(height: 5, width: 0),
-          SizedBox(
-            width: double.infinity,
-            child: Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                Container(
-                  child: AppImageProvider.asset(
-                    asset: 'user3',
-                    height: 195,
-                    width: 195,
-                  ),
-                ),
-                Container(
-                  child: AppImageProvider.asset(
-                    asset: 'user4',
-                    height: 195,
-                    width: 195,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          space(height: 15, width: 0),
+          space(height: 19, width: 0),
+          const FeaturedWidget(),
+          // Expanded(child: TipsScreen()),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Video', style: appText(size: 18, weight: FontWeight.w600)),
+              Text('Video', style: appText(size: 13, weight: FontWeight.w400)),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
@@ -114,6 +109,8 @@ class InfoScreen extends StatelessWidget {
               ],
             ),
           ),
+
+          const ReviewScreen(),
           space(height: 15, width: 0),
         ],
       ),

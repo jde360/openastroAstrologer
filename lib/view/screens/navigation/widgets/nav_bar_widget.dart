@@ -41,7 +41,7 @@ class NavBarWidget extends StatelessWidget {
               width: 40.w,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: AppColor().primary.withOpacity(0.1),
+                  color: AppColor().primary.withValues(alpha: 0.2),
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(50),

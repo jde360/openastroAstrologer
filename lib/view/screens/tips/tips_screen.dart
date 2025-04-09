@@ -5,7 +5,6 @@ import 'package:open_astro/data/video_data.dart';
 import 'package:open_astro/model/video_model.dart';
 
 import '../../../service/svg_provider.dart';
-import '../../widgets/appbar.dart';
 import 'widgets/controller.dart';
 import 'widgets/video_player.dart';
 
@@ -29,43 +28,42 @@ class _TipsScreenState extends State<TipsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
-          itemCount: listOfTips.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return SizedBox(
-              height: double.infinity,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  AppVideoPlayer(
-                    url: videoData[index]['sources'][0],
-                  ),
+        itemCount: listOfTips.length,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                AppVideoPlayer(url: videoData[index]['sources'][0]),
 
-                  //back button
-
-                  Positioned(
-                    top: 20,
-                    left: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: SvgProvider.asset(asset: 'arrow_back'),
-                      ),
+                //back button
+                Positioned(
+                  top: 20,
+                  left: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: SvgProvider.asset(asset: 'arrow_back'),
                     ),
                   ),
+                ),
 
-                  //controller
-                  Positioned(
-                      right: 0,
-                      bottom: 150.h,
-                      child: const AppVideoController())
-                ],
-              ),
-            );
-          }),
+                //controller
+                Positioned(
+                  right: 0,
+                  bottom: 150.h,
+                  child: const AppVideoController(),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

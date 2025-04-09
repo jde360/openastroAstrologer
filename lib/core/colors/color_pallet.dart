@@ -8,6 +8,8 @@ class AppColor {
   final Color _success = const Color(0XFF28BF14);
   final Color _error = const Color(0XFFD80000);
   final Color _warning = const Color(0XFFFFBF00);
+  final Color _rating = const Color(0XFFF8F6AA);
+  final Color _chatColor = const Color(0XFFFDF5DA);
   Color get primary => _primary;
   Color get secondary => _secondary;
   Color get textColor => _textColor;
@@ -15,4 +17,6 @@ class AppColor {
   Color get success => _success;
   Color get error => _error;
   Color get warning => _warning;
+  Color get rating => _rating;
+  Color get chatColor => _chatColor;
 }
