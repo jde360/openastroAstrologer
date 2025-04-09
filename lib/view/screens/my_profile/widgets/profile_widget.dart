@@ -19,10 +19,13 @@ class MyProfileWidget extends StatelessWidget {
         ),
       ),
       //name
-      title: Text("Jayanta", style: appText(size: 17, weight: FontWeight.w600)),
+      title: Text(
+        "Astrologer Name",
+        style: appText(size: 17, weight: FontWeight.w600),
+      ),
       //specilizations
       subtitle: Text(
-        "Vedik| Hjkncj",
+        "Astrologer Specialization",
         style: appText(size: 12, weight: FontWeight.w400),
       ),
       //follower & reels
@@ -51,6 +54,7 @@ class MyProfileWidget extends StatelessWidget {
         ),
       ),
     );
+
     // return Row(
     //   mainAxisAlignment: MainAxisAlignment.s,
     //   crossAxisAlignment: CrossAxisAlignment.center,

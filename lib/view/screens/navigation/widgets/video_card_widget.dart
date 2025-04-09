@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:open_astro/service/svg_provider.dart';
 import 'package:open_astro/view/ui_helper/ui_helper.dart';
 
+import '../../../../core/colors/color_pallet.dart';
+
 class VideoCardWidget extends StatelessWidget {
   final String id;
   final String thumbnail;
@@ -14,6 +16,7 @@ class VideoCardWidget extends StatelessWidget {
       height: percentWidth(percent: 28),
       width: percentWidth(percent: 28),
       decoration: BoxDecoration(
+        color: AppColor().primary.withOpacity(0.2),
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
           image: NetworkImage(thumbnail),

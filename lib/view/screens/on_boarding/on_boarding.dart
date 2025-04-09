@@ -99,7 +99,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       color:
                           currentIndex == 0
                               ? AppColor().primary
-                              : AppColor().primary.withOpacity(0.4),
+                              : AppColor().primary.withValues(alpha: 0.2),
                     ),
                   ),
                   Container(
@@ -111,7 +111,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       color:
                           currentIndex == 1
                               ? AppColor().primary
-                              : AppColor().primary.withOpacity(0.4),
+                              : AppColor().primary.withValues(alpha: 0.2),
                     ),
                   ),
                   Container(
@@ -123,7 +123,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       color:
                           currentIndex == 2
                               ? AppColor().primary
-                              : AppColor().primary.withOpacity(0.4),
+                              : AppColor().primary.withValues(alpha: 0.2),
                     ),
                   ),
                 ],

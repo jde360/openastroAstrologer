@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:open_astro/view/widgets/alertbox.dart';
 
 import '../../../service/local_storage.dart';
 import 'widgets/custom_tabs.dart';
@@ -11,17 +12,14 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LocalStorage _localStorage = LocalStorage();
-
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,
         title: const Text("My Profile"),
         actions: [
           IconButton(
             onPressed: () {
-              _localStorage.removeToken();
-              _localStorage.setLatestFalse();
-              Get.offAllNamed('/');
+              logoutAlertBox(context);
             },
             icon: const Icon(Icons.logout_outlined),
           ),
