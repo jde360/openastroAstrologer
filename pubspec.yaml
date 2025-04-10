@@ -20,6 +20,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0 #intercepter
   pinput: ^5.0.0 #otp 
   share_plus: ^10.0.0 # share plus
+  skeletonizer: ^1.4.3
   shared_preferences: ^2.5.3 # local storage
   video_player: ^2.9.2 # video player
 

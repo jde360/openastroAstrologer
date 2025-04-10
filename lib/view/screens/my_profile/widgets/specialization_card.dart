@@ -4,7 +4,8 @@ import '../../../../core/colors/color_pallet.dart';
 import '../../../../core/font/app_font.dart';
 
 class SpecializationCard extends StatelessWidget {
-  const SpecializationCard({super.key});
+  final String text;
+  const SpecializationCard({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class SpecializationCard extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: Text(
-          'Relationship Astrology',
+          text,
           style: appText(size: 14, weight: FontWeight.w400),
           textAlign: TextAlign.center,
         ),

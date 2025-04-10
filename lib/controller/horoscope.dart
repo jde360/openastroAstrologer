@@ -88,6 +88,7 @@ class HoroscopeController extends GetxController {
         body: body,
       );
       await _localStorage.setLatest(false);
+      Get.offAllNamed('/navigation');
 
       return res;
       // } else {

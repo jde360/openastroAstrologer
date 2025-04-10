@@ -50,11 +50,7 @@ List<GetPage> appRoute = [
     page: () => const FollowersScreen(),
     binding: AppBinding(),
   ),
-  GetPage(
-    name: '/my-profile',
-    page: () => const MyProfile(),
-    binding: AppBinding(),
-  ),
+  GetPage(name: '/my-profile', page: () => MyProfile(), binding: AppBinding()),
   GetPage(name: '/chat', page: () => const ChatScreen(), binding: AppBinding()),
   GetPage(
     name: '/edit-profile',

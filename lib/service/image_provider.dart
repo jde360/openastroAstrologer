@@ -15,12 +15,12 @@ class AppImageProvider {
     fit: BoxFit.fill,
   );
 
-  static Image network(
-    Color color,
-    int height,
-    int width, {
-    required String url,
-  }) {
-    return Image.asset(url, color: color, height: height.h, width: width.w);
+  static Image network(int height, int width, {required String url}) {
+    return Image.network(
+      url,
+      height: height.h,
+      width: width.w,
+      fit: BoxFit.cover,
+    );
   }
 }
