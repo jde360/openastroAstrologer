@@ -69,7 +69,7 @@ class NavBarWidget extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Get.toNamed('/followers');
+              Get.toNamed('/users');
             },
             icon: SvgProvider.asset(asset: 'followers'),
           ),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:open_astro/model/followers_list.dart';
 import 'package:open_astro/repository/astrologer/astrologer.dart';
 
 import '../core/error/error.dart';
@@ -11,11 +12,13 @@ class AstrologerProfileController extends GetxController {
   RxBool chatStatus = false.obs;
   Rx<AstrologerProfile> astrologerProfileData = AstrologerProfile().obs;
   final AstrologerRepository _astrologerRepository = AstrologerRepository();
+  RxList<FollowersList> listOfFollowers = <FollowersList>[].obs;
 
   @override
   void onInit() async {
     super.onInit();
     await getAstrologerProfile();
+    await getFollowers();
   }
 
   Future<AstrologerProfile> getAstrologerProfile() async {
@@ -78,6 +81,24 @@ class AstrologerProfileController extends GetxController {
       Map body = {'status': status};
 
       await _astrologerRepository.updateVideoStatus(body: body);
+    } on AppError {
+      rethrow;
+    } catch (e) {
+      log("error : $e");
+      throw AppError(code: 400, err: '$e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> getFollowers() async {
+    try {
+      isLoading(true);
+
+      List<FollowersList> followers =
+          await _astrologerRepository.getFollowers();
+
+      listOfFollowers.assignAll(followers);
     } on AppError {
       rethrow;
     } catch (e) {

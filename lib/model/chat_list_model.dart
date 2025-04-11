@@ -1,7 +1,7 @@
 class ChatList {
   String? sId;
-  UserId? userId;
-  AstrologerId? astrologerId;
+  User? user;
+  Astrologer? astrologer;
   String? lastMessage;
   bool? chatOpen;
   String? createdAt;
@@ -11,8 +11,8 @@ class ChatList {
 
   ChatList({
     this.sId,
-    this.userId,
-    this.astrologerId,
+    this.user,
+    this.astrologer,
     this.lastMessage,
     this.chatOpen,
     this.createdAt,
@@ -23,11 +23,10 @@ class ChatList {
 
   ChatList.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    userId =
-        json['userId'] != null ? new UserId.fromJson(json['userId']) : null;
-    astrologerId =
+    user = json['userId'] != null ? new User.fromJson(json['userId']) : null;
+    astrologer =
         json['astrologerId'] != null
-            ? new AstrologerId.fromJson(json['astrologerId'])
+            ? new Astrologer.fromJson(json['astrologerId'])
             : null;
     lastMessage = json['lastMessage'];
     chatOpen = json['chatOpen'];
@@ -40,11 +39,11 @@ class ChatList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
-    if (this.userId != null) {
-      data['userId'] = this.userId!.toJson();
+    if (this.user != null) {
+      data['userId'] = this.user!.toJson();
     }
-    if (this.astrologerId != null) {
-      data['astrologerId'] = this.astrologerId!.toJson();
+    if (this.astrologer != null) {
+      data['astrologerId'] = this.astrologer!.toJson();
     }
     data['lastMessage'] = this.lastMessage;
     data['chatOpen'] = this.chatOpen;
@@ -56,15 +55,15 @@ class ChatList {
   }
 }
 
-class UserId {
+class User {
   String? sId;
   String? name;
   String? profileImage;
   String? socketId;
 
-  UserId({this.sId, this.name, this.profileImage, this.socketId});
+  User({this.sId, this.name, this.profileImage, this.socketId});
 
-  UserId.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     profileImage = json['profileImage'];
@@ -81,14 +80,14 @@ class UserId {
   }
 }
 
-class AstrologerId {
+class Astrologer {
   String? sId;
   String? realName;
   String? profileImage;
   String? displayName;
   String? socketId;
 
-  AstrologerId({
+  Astrologer({
     this.sId,
     this.realName,
     this.profileImage,
@@ -96,7 +95,7 @@ class AstrologerId {
     this.socketId,
   });
 
-  AstrologerId.fromJson(Map<String, dynamic> json) {
+  Astrologer.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     realName = json['realName'];
     profileImage = json['profileImage'];

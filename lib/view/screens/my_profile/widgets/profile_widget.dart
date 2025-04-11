@@ -58,14 +58,22 @@ class MyProfileWidget extends StatelessWidget {
                 Text("Tips", style: appText(size: 10, weight: FontWeight.w400)),
               ],
             ),
-            Column(
-              children: [
-                Text("10k", style: appText(size: 14, weight: FontWeight.w600)),
-                Text(
-                  "Followers",
-                  style: appText(size: 10, weight: FontWeight.w400),
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                Get.toNamed('/my-followers');
+              },
+              child: Column(
+                children: [
+                  Text(
+                    "10k",
+                    style: appText(size: 14, weight: FontWeight.w600),
+                  ),
+                  Text(
+                    "Followers",
+                    style: appText(size: 10, weight: FontWeight.w400),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:open_astro/core/network/http_client.dart';
+import 'package:open_astro/model/followers_list.dart';
 import 'package:open_astro/repository/astrologer/source/remote/remote.dart';
 
 import '../../core/error/error.dart';
@@ -40,6 +41,14 @@ class AstrologerRepository {
       return await AstrologerRemoteDataSource(
         api: _api,
       ).updateVideoStatus(body: body);
+    } on AppError {
+      throw AppError;
+    }
+  }
+
+  Future<List<FollowersList>> getFollowers() async {
+    try {
+      return await AstrologerRemoteDataSource(api: _api).getFollowers();
     } on AppError {
       throw AppError;
     }

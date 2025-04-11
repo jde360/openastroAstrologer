@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:open_astro/view/widgets/alertbox.dart';
+import 'package:open_astro/view/widgets/log_out_alertbox.dart';
 
 import '../../../controller/astrologer_profile_controller.dart';
 import '../../../core/colors/color_pallet.dart';
