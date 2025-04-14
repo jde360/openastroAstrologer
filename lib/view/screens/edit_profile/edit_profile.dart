@@ -1,13 +1,20 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:open_astro/controller/astrologer_profile_controller.dart';
 
 import '../../../controller/horoscope.dart';
 import '../../../core/colors/color_pallet.dart';
 import '../../../core/font/app_font.dart';
+import '../../../service/image_picker.dart';
 import '../../widgets/filter_chip.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/reg_input.dart';
 import '../../widgets/space.dart';
+import '../my_profile/widgets/profile_pic_alartbox.dart';
 
 class EditProfile extends StatefulWidget {
   EditProfile({super.key});
@@ -18,33 +25,99 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final HoroscopeController _horoscopeController = Get.find();
-
-  final TextEditingController nameController = TextEditingController();
-
-  final TextEditingController displayNameController = TextEditingController();
-
-  final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController exprienceController = TextEditingController();
-
-  final TextEditingController descriptionController = TextEditingController();
+  final AstrologerProfileController _astrologerProfileController = Get.find();
 
   List<String> selectedSpecializationIds = [];
 
-  List<String> selectedPujaIds = [];
+  List<String?> selectedPujaIds = [];
+  File? selectedImage;
+
+  void imagePicker() async {
+    try {
+      final XFile? image = await imagePickerHandelar();
+
+      if (image != null) {
+        setState(() {
+          selectedImage = File(image.path);
+        });
+      } else {
+        log('No image selected.');
+      }
+    } catch (e) {
+      log('Error picking image: $e');
+    }
+  }
 
   @override
-  void dispose() {
-    nameController.dispose();
-    displayNameController.dispose();
-    emailController.dispose();
-    exprienceController.dispose();
-    descriptionController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+
+    final specializations =
+        _astrologerProfileController
+            .astrologerProfileData
+            .value
+            .astroProfile
+            ?.specializations;
+
+    final pujas =
+        _astrologerProfileController
+            .astrologerProfileData
+            .value
+            .astroProfile
+            ?.puja;
+
+    if (specializations != null) {
+      selectedSpecializationIds = specializations.map((e) => e.sId!).toList();
+    }
+    if (pujas != null) {
+      selectedPujaIds = pujas.map((e) => e.sId!).toList();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController(
+      text: _astrologerProfileController.astrologerProfileData.value.realName,
+    );
+
+    final TextEditingController displayNameController = TextEditingController(
+      text:
+          _astrologerProfileController.astrologerProfileData.value.displayName,
+    );
+
+    final TextEditingController emailController = TextEditingController(
+      text: _astrologerProfileController.astrologerProfileData.value.email,
+    );
+
+    final TextEditingController exprienceController = TextEditingController(
+      text:
+          _astrologerProfileController
+              .astrologerProfileData
+              .value
+              .astroProfile
+              ?.experience
+              .toString(),
+    );
+
+    final TextEditingController descriptionController = TextEditingController(
+      text:
+          _astrologerProfileController
+              .astrologerProfileData
+              .value
+              .astroProfile
+              ?.desc,
+    );
+
+    @override
+    void dispose() {
+      nameController.dispose();
+      displayNameController.dispose();
+      emailController.dispose();
+      exprienceController.dispose();
+      descriptionController.dispose();
+      super.dispose();
+    }
+
     return Scaffold(
       appBar: AppBar(centerTitle: false, title: const Text('Edit Profile')),
       body: Obx(() {
@@ -57,7 +130,13 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 space(height: 8, width: 0),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    profilePicAlert(
+                      context: context,
+                      imageUploadFunc: imagePicker,
+                      selectedImage: selectedImage,
+                    );
+                  },
                   child: Badge(
                     alignment: Alignment.bottomRight,
                     backgroundColor: Colors.transparent,
@@ -68,7 +147,9 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: AppColor().primary.withOpacity(0.2),
+                      backgroundColor: AppColor().primary.withValues(
+                        alpha: 0.2,
+                      ),
                       // backgroundImage:
                       //     selectedImage != null
                       //         ? FileImage(selectedImage!)

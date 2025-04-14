@@ -1,14 +1,15 @@
 import 'package:get/get.dart';
-import 'package:open_astro/view/screens/edit_profile/edit_profile.dart';
 
-import '../binding/auth.dart';
+import '../binding/app_binding.dart';
 import '../core/error/error_screen.dart';
 import '../view/screens/authentication/mobile_number.dart';
 import '../view/screens/authentication/otp_screen.dart';
 import '../view/screens/authentication/registartation.dart';
 import '../view/screens/chat/chat.dart';
 import '../view/screens/chat_participents/chat_participents.dart';
-import '../view/screens/followers/followers.dart';
+import '../view/screens/edit_profile/edit_profile.dart';
+import '../view/screens/users/users.dart';
+import '../view/screens/followers_list/followers_list.dart';
 import '../view/screens/my_profile/my_profile.dart';
 import '../view/screens/navigation/navigation_screen.dart';
 import '../view/screens/on_boarding/on_boarding.dart';
@@ -42,23 +43,20 @@ List<GetPage> appRoute = [
   ),
   GetPage(
     name: '/chat-partcipents',
-    page: () => const ChatParticipents(),
+    page: () => ChatParticipents(),
     binding: AppBinding(),
   ),
-  GetPage(
-    name: '/followers',
-    page: () => const FollowersScreen(),
-    binding: AppBinding(),
-  ),
-  GetPage(
-    name: '/my-profile',
-    page: () => const MyProfile(),
-    binding: AppBinding(),
-  ),
+  GetPage(name: '/users', page: () => UsersScreen(), binding: AppBinding()),
+  GetPage(name: '/my-profile', page: () => MyProfile(), binding: AppBinding()),
   GetPage(name: '/chat', page: () => const ChatScreen(), binding: AppBinding()),
   GetPage(
     name: '/edit-profile',
     page: () => EditProfile(),
+    binding: AppBinding(),
+  ),
+  GetPage(
+    name: '/my-followers',
+    page: () => FollowersListScreen(),
     binding: AppBinding(),
   ),
 ];

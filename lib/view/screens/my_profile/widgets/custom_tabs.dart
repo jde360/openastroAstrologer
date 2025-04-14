@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:open_astro/view/ui_helper/ui_helper.dart';
+import 'package:get/get.dart';
 
 import '../../../../service/image_provider.dart';
 import '../screens/info.dart';
@@ -7,7 +8,7 @@ import '../screens/review.dart';
 import '../screens/tips.dart';
 
 class CustomTabs extends StatelessWidget {
-  const CustomTabs({super.key});
+  CustomTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class CustomTabs extends StatelessWidget {
                 ),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(
                 children: [InfoScreen(), TipsScreen(), ReviewScreen()],
               ),

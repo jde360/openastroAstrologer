@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:open_astro/service/local_storage.dart';
 import 'package:open_astro/service/svg_provider.dart';
 
+import '../../../../controller/astrologer_profile_controller.dart';
 import '../../../../core/colors/color_pallet.dart';
 
 class NavBarWidget extends StatelessWidget {
   NavBarWidget({super.key});
   final LocalStorage _localStorage = LocalStorage();
+  final AstrologerProfileController _astrologerProfileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +30,37 @@ class NavBarWidget extends StatelessWidget {
             },
             icon: SvgProvider.asset(asset: 'tips'),
           ),
-          IconButton(
-            onPressed: () {
-              // _localStorage.removeToken();
-              // _localStorage.setLatestFalse();
-              // Get.offAllNamed('/');
-
-              Get.toNamed('/my-profile');
-            },
-            icon: Container(
-              height: 40.h,
-              width: 40.w,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColor().primary.withValues(alpha: 0.2),
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(50),
-                color: AppColor().primary,
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/user1.png'),
-                  fit: BoxFit.cover,
+          Obx(() {
+            var profileImage =
+                _astrologerProfileController
+                    .astrologerProfileData
+                    .value
+                    .profileImage;
+            return IconButton(
+              onPressed: () {
+                Get.toNamed('/my-profile');
+              },
+              icon: Container(
+                height: 40.h,
+                width: 40.w,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: AppColor().primary.withValues(alpha: 0.2),
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
+                  color: AppColor().primary,
+                  image: DecorationImage(
+                    image:
+                        profileImage != null
+                            ? NetworkImage(profileImage)
+                            : AssetImage("/assets/images/user1.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          }),
           IconButton(
             onPressed: () {
               Get.toNamed('/chat-partcipents');
@@ -61,7 +69,7 @@ class NavBarWidget extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Get.toNamed('/followers');
+              Get.toNamed('/users');
             },
             icon: SvgProvider.asset(asset: 'followers'),
           ),

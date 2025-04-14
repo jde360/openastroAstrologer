@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:open_astro/view/screens/my_profile/screens/review.dart';
 import 'package:open_astro/view/screens/my_profile/widgets/specialization_card.dart';
 
+import '../../../../controller/astrologer_profile_controller.dart';
 import '../../../../core/font/app_font.dart';
 import '../../../widgets/space.dart';
 import '../../navigation/widgets/video_card_widget.dart';
@@ -9,13 +10,21 @@ import '../widgets/featured.dart';
 import 'package:get/get.dart';
 
 class InfoScreen extends StatelessWidget {
-  const InfoScreen({super.key});
+  InfoScreen({super.key});
+
+  final AstrologerProfileController _astrologerProfileController = Get.find();
 
   final String thumbnail =
       'https://s3-alpha-sig.figma.com/img/b283/5891/58f870bf0940aff3e099b3032c91587d?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JiuoeaI22vXTc0nslszquZERj00Jc5zQuoVEeimOzFyqDEOhUI31~fdl9FZgQJSkrsnXOPd9Ign0Htmdkjq4odIDZSHrNEm9v9cGH2pcjJ72mP9LLh24o9e6rttIeZvXBBvNijQzW-su-eYpJjbAECc4Be-LSEmBn6dHtbqgargaYfr~uLWO~z0eMY5QD69Pgdr04bopNS-biJjdPBAr4dnjvvPK9LqQdUnwH5QFAmL1R8u3j6pPMSeXGSkCAFH~6VyCyHyRfVFSK4fwrnE-UThp5C6uB-kda7iyGheCDoyOEU-LAfslYPD3O-U0unq-HIDOcUvhvTMh2-NH7MWIYg__';
 
   @override
   Widget build(BuildContext context) {
+    final specializations =
+        _astrologerProfileController
+            .astrologerProfileData
+            .value
+            .astroProfile
+            ?.specializations;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,18 +61,16 @@ class InfoScreen extends StatelessWidget {
             ],
           ),
           space(height: 22, width: 0),
-          const SizedBox(
+          SizedBox(
             width: double.infinity,
             child: Wrap(
               spacing: 8,
               runSpacing: 9,
               children: [
-                SpecializationCard(),
-                SpecializationCard(),
-                SpecializationCard(),
-                SpecializationCard(),
-                SpecializationCard(),
-                SpecializationCard(),
+                if (specializations != null)
+                  ...specializations.map(
+                    (spec) => SpecializationCard(text: spec.name ?? ''),
+                  ),
               ],
             ),
           ),
@@ -79,13 +86,18 @@ class InfoScreen extends StatelessWidget {
               ),
               space(height: 12, width: 0),
               Text(
-                'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+                _astrologerProfileController
+                        .astrologerProfileData
+                        .value
+                        .astroProfile
+                        ?.desc ??
+                    '',
                 style: appText(size: 14, weight: FontWeight.w400),
               ),
             ],
           ),
           space(height: 19, width: 0),
-          const FeaturedWidget(),
+          FeaturedWidget(),
           // Expanded(child: TipsScreen()),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

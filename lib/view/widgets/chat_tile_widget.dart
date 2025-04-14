@@ -8,12 +8,13 @@ class ChatTileWidget extends StatelessWidget {
   final String subtitle;
   final String imageUrl;
   final bool isOnline;
-  const ChatTileWidget(
-      {super.key,
-      required this.name,
-      required this.subtitle,
-      required this.imageUrl,
-      required this.isOnline});
+  const ChatTileWidget({
+    super.key,
+    required this.name,
+    required this.subtitle,
+    required this.imageUrl,
+    required this.isOnline,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,9 @@ class ChatTileWidget extends StatelessWidget {
                 border: Border.all(color: AppColor().primary, width: 2),
                 borderRadius: BorderRadius.circular(50),
                 image: DecorationImage(
-                    image: AssetImage(imageUrl), fit: BoxFit.cover),
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Positioned(
@@ -41,18 +44,16 @@ class ChatTileWidget extends StatelessWidget {
                 height: 15.h,
                 width: 15.w,
                 decoration: BoxDecoration(
-                    color: isOnline ? AppColor().success : AppColor().error,
-                    border: Border.all(color: AppColor().primary, width: 2),
-                    borderRadius: BorderRadius.circular(50)),
+                  color: isOnline ? AppColor().success : AppColor().error,
+                  border: Border.all(color: AppColor().primary, width: 2),
+                  borderRadius: BorderRadius.circular(50),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
-      title: Text(
-        name,
-        style: appText(size: 15, weight: FontWeight.w600),
-      ),
+      title: Text(name, style: appText(size: 15, weight: FontWeight.w600)),
       subtitle: Text(
         subtitle,
         style: appText(size: 11, weight: FontWeight.w400),
@@ -61,8 +62,10 @@ class ChatTileWidget extends StatelessWidget {
         children: [
           Text(
             '10:30 AM',
-            style: appText(size: 8, weight: FontWeight.w600)
-                .copyWith(color: AppColor().primary),
+            style: appText(
+              size: 8,
+              weight: FontWeight.w600,
+            ).copyWith(color: AppColor().primary),
           ),
           const SizedBox(height: 10),
           Container(
@@ -70,7 +73,9 @@ class ChatTileWidget extends StatelessWidget {
             height: 14,
             width: 14,
             decoration: BoxDecoration(
-                shape: BoxShape.circle, color: AppColor().primary),
+              shape: BoxShape.circle,
+              color: AppColor().primary,
+            ),
             child: Text(
               '5',
               style: appText(
@@ -78,7 +83,7 @@ class ChatTileWidget extends StatelessWidget {
                 weight: FontWeight.w600,
               ).copyWith(color: AppColor().bg),
             ),
-          )
+          ),
         ],
       ),
     );
