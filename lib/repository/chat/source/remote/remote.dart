@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:open_astro/core/network/http_client.dart';
+import 'package:open_astro/model/chat_details_model.dart';
 
 import '../../../../core/error/error.dart';
 import '../../../../model/chat_list_model.dart';
@@ -28,6 +29,36 @@ class ChatRemoteDataSource {
         }
       }
       return chatlist;
+    } on DioException catch (e) {
+      throw AppError(
+        code: e.response?.statusCode ?? 400,
+        err:
+            e.response?.data['error'] ??
+            e.response?.statusMessage ??
+            'Unknown Error',
+      );
+    }
+  }
+
+  Future<List<ChatDetailsModel>> getChatDetails({
+    required String userId,
+  }) async {
+    try {
+      await _localStorage.init();
+      final token = await _localStorage.getToken();
+      api.dio.options.headers["Authorization"] = "Bearer $token";
+
+      List<ChatDetailsModel> chatDetails = [];
+
+      Response response = await api.dio.get("/chat/history/$userId");
+
+      if (response.statusCode == 200 && response.data != null) {
+        List<dynamic> result = response.data;
+        for (var data in result) {
+          chatDetails.add(ChatDetailsModel.fromJson(data));
+        }
+      }
+      return chatDetails;
     } on DioException catch (e) {
       throw AppError(
         code: e.response?.statusCode ?? 400,

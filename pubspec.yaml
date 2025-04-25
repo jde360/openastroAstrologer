@@ -18,11 +18,13 @@ dependencies:
   get: ^4.6.6 # state management
   image_picker: ^1.1.2 #image picker
   intl: ^0.20.2 #time format
+  logger: ^2.5.0
   pretty_dio_logger: ^1.4.0 #intercepter
   pinput: ^5.0.0 #otp 
   share_plus: ^10.0.0 # share plus
   skeletonizer: ^1.4.3
   shared_preferences: ^2.5.3 # local storage
+  socket_io_client: ^3.1.1
   video_player: ^2.9.2 # video player
 
 dev_dependencies:

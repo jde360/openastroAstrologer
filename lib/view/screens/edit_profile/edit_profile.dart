@@ -121,6 +121,11 @@ class _EditProfileState extends State<EditProfile> {
     return Scaffold(
       appBar: AppBar(centerTitle: false, title: const Text('Edit Profile')),
       body: Obx(() {
+        var profileImage =
+            _astrologerProfileController
+                .astrologerProfileData
+                .value
+                .profileImage;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
@@ -147,14 +152,17 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: AppColor().primary.withValues(
-                        alpha: 0.2,
-                      ),
-                      // backgroundImage:
-                      //     selectedImage != null
-                      //         ? FileImage(selectedImage!)
-                      //         : null,
-                      child: const Icon(Icons.person, size: 40),
+                      backgroundColor: AppColor().primary.withOpacity(0.2),
+                      backgroundImage:
+                          selectedImage != null
+                              ? FileImage(selectedImage!)
+                              : profileImage != null
+                              ? NetworkImage(profileImage)
+                              : null,
+                      child:
+                          profileImage == null && selectedImage != null
+                              ? const Icon(Icons.person, size: 40)
+                              : null,
                     ),
                   ),
                 ),

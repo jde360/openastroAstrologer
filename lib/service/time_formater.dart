@@ -10,8 +10,9 @@ class AppFormatedTime {
       return 'Today ${DateFormat.jm().format(DateTime.parse(time).toLocal())}';
     }
 
-    if (DateFormat('yyyy-MM-dd')
-            .parse(today.subtract(const Duration(days: 1)).toString()) ==
+    if (DateFormat(
+          'yyyy-MM-dd',
+        ).parse(today.subtract(const Duration(days: 1)).toString()) ==
         serverStr) {
       return 'Yesterday ${DateFormat.jm().format(DateTime.parse(time).toLocal())}';
     }
@@ -22,5 +23,9 @@ class AppFormatedTime {
   static String getDuration(String start, String end) {
     Duration duration = DateTime.parse(end).difference(DateTime.parse(start));
     return duration.toString().split('.').first.padLeft(8, "0");
+  }
+
+  static String getTime(String time) {
+    return DateFormat.jm().format(DateTime.parse(time).toLocal());
   }
 }

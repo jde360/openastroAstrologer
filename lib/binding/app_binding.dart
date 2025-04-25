@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:open_astro/controller/astrologer_profile_controller.dart';
 import 'package:open_astro/controller/auth.dart';
-import 'package:open_astro/controller/chat_list_controller.dart';
+import 'package:open_astro/controller/chat_controller.dart';
 import 'package:open_astro/controller/horoscope.dart';
 
 import '../controller/user_controller.dart';
@@ -15,6 +15,6 @@ class AppBinding extends Bindings {
     Get.lazyPut<AstrologerProfileController>(
       () => AstrologerProfileController(),
     );
-    Get.lazyPut<ChatListController>(() => ChatListController());
+    Get.lazyPut<ChatController>(() => ChatController());
   }
 }
