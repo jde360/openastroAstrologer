@@ -8,12 +8,14 @@ class ChatTileWidget extends StatelessWidget {
   final String subtitle;
   final String imageUrl;
   final bool isOnline;
+  final int unreadCount;
   const ChatTileWidget({
     super.key,
     required this.name,
     required this.subtitle,
     required this.imageUrl,
     required this.isOnline,
+    required this.unreadCount,
   });
 
   @override
@@ -77,7 +79,7 @@ class ChatTileWidget extends StatelessWidget {
               color: AppColor().primary,
             ),
             child: Text(
-              '5',
+              '$unreadCount',
               style: appText(
                 size: 8,
                 weight: FontWeight.w600,

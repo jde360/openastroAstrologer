@@ -12,7 +12,7 @@ class AppImageProvider {
     color: color,
     height: height?.h,
     width: width?.w,
-    fit: BoxFit.fill,
+    fit: BoxFit.cover,
   );
 
   static Image network(int height, int width, {required String url}) {

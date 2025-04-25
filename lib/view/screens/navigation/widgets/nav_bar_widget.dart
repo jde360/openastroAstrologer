@@ -54,7 +54,7 @@ class NavBarWidget extends StatelessWidget {
                     image:
                         profileImage != null
                             ? NetworkImage(profileImage)
-                            : AssetImage("/assets/images/user1.png"),
+                            : AssetImage("assets/images/user1.png"),
                     fit: BoxFit.cover,
                   ),
                 ),

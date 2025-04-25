@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:open_astro/model/user_details_model.dart';
 
 import '../../../../core/error/error.dart';
 import '../../../../model/user_list_model.dart';
@@ -9,7 +12,7 @@ import '../../../../service/local_storage.dart';
 class UserRemoteDataSource {
   final API api;
   UserRemoteDataSource({required this.api});
-  // final LocalStorage _localStorage = LocalStorage();
+  final LocalStorage _localStorage = LocalStorage();
 
   Future<List<UserListModel>> getUserList() async {
     try {
@@ -30,6 +33,26 @@ class UserRemoteDataSource {
         }
       }
       return userList;
+    } on DioException catch (e) {
+      throw AppError(
+        code: e.response?.statusCode ?? 400,
+        err:
+            e.response?.data['error'] ??
+            e.response?.statusMessage ??
+            'Unknown Error',
+      );
+    }
+  }
+
+  Future<UserDetailsModel> getUserProfile({required String id}) async {
+    try {
+      // await _localStorage.init();
+      // final token = await _localStorage.getToken();
+      // api.dio.options.headers["Authorization"] = "Bearer $token";
+
+      Response response = await api.dio.get("/account/user/$id");
+
+      return UserDetailsModel.fromJson(response.data);
     } on DioException catch (e) {
       throw AppError(
         code: e.response?.statusCode ?? 400,

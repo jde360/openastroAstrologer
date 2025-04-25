@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:open_astro/core/font/app_font.dart';
+import 'package:open_astro/view/ui_helper/ui_helper.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../controller/astrologer_profile_controller.dart';
+import '../../../controller/chat_controller.dart';
 import '../../../controller/user_controller.dart';
 import '../../widgets/space.dart';
 import '../../widgets/user_card_widget.dart';
@@ -24,11 +26,22 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
   final AstrologerProfileController _astrologerProfileController = Get.find();
+  final ChatController _chatController = Get.find();
+
   final UserController _userController = Get.find();
 
   List<String> switchList = ['phone', 'video', 'message'];
-  final String thumbnail =
-      'https://s3-alpha-sig.figma.com/img/b283/5891/58f870bf0940aff3e099b3032c91587d?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JiuoeaI22vXTc0nslszquZERj00Jc5zQuoVEeimOzFyqDEOhUI31~fdl9FZgQJSkrsnXOPd9Ign0Htmdkjq4odIDZSHrNEm9v9cGH2pcjJ72mP9LLh24o9e6rttIeZvXBBvNijQzW-su-eYpJjbAECc4Be-LSEmBn6dHtbqgargaYfr~uLWO~z0eMY5QD69Pgdr04bopNS-biJjdPBAr4dnjvvPK9LqQdUnwH5QFAmL1R8u3j6pPMSeXGSkCAFH~6VyCyHyRfVFSK4fwrnE-UThp5C6uB-kda7iyGheCDoyOEU-LAfslYPD3O-U0unq-HIDOcUvhvTMh2-NH7MWIYg__';
+  // final String thumbnail =
+  //     'https://s3-alpha-sig.figma.com/img/b283/5891/58f870bf0940aff3e099b3032c91587d?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JiuoeaI22vXTc0nslszquZERj00Jc5zQuoVEeimOzFyqDEOhUI31~fdl9FZgQJSkrsnXOPd9Ign0Htmdkjq4odIDZSHrNEm9v9cGH2pcjJ72mP9LLh24o9e6rttIeZvXBBvNijQzW-su-eYpJjbAECc4Be-LSEmBn6dHtbqgargaYfr~uLWO~z0eMY5QD69Pgdr04bopNS-biJjdPBAr4dnjvvPK9LqQdUnwH5QFAmL1R8u3j6pPMSeXGSkCAFH~6VyCyHyRfVFSK4fwrnE-UThp5C6uB-kda7iyGheCDoyOEU-LAfslYPD3O-U0unq-HIDOcUvhvTMh2-NH7MWIYg__';
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () async {
+      await _userController.getUserList();
+      await _chatController.getChatList();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,30 +163,34 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       ),
                     ],
                   ),
-                  const ChatTileWidget(
-                    imageUrl: 'assets/images/user1.png',
-                    isOnline: true,
-                    name: 'Rohan Das',
-                    subtitle: 'Hello How are you',
-                  ),
-                  const ChatTileWidget(
-                    imageUrl: 'assets/images/user2.png',
-                    isOnline: false,
-                    name: 'Devika pathak',
-                    subtitle: 'Hello How are you',
-                  ),
-                  const ChatTileWidget(
-                    imageUrl: 'assets/images/user3.png',
-                    isOnline: false,
-                    name: 'Pooja Nathan',
-                    subtitle: 'Hello How are you',
-                  ),
-                  const ChatTileWidget(
-                    imageUrl: 'assets/images/user4.png',
-                    isOnline: true,
-                    name: 'Rajesh Srivastav',
-                    subtitle: 'Hello How are you',
-                  ),
+                  Obx(() {
+                    return SizedBox(
+                      width: double.infinity,
+                      height: percentHeight(percent: 15),
+                      child: ListView.builder(
+                        itemCount:
+                            _chatController.listOfChat.length > 5
+                                ? 5
+                                : _chatController.listOfChat.length,
+                        itemBuilder: (context, index) {
+                          final chat = _chatController.listOfChat[index];
+                          return GestureDetector(
+                            onTap: () {
+                              // Get.toNamed('/chat');
+                            },
+                            child: ChatTileWidget(
+                              imageUrl: chat.user?.profileImage ?? '',
+                              isOnline: chat.chatOpen ?? false,
+                              name: chat.user?.name ?? '',
+                              subtitle: chat.lastMessage!,
+                              unreadCount: chat?.unreadCount ?? 0,
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }),
+
                   space(height: 0, width: 0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,15 +214,15 @@ class _NavigationScreenState extends State<NavigationScreen> {
                       spacing: 10,
                       runSpacing: 10,
                       children: [
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
-                        VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
+                        // VideoCardWidget(id: '1', thumbnail: thumbnail),
                       ],
                     ),
                   ),
@@ -237,8 +254,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                         final user = _userController.listOfUser[index];
                         return UserCardWidget(
                           name: user.name ?? '',
-                          image: thumbnail,
-                          id: '$index',
+                          image: user.profileImage,
+                          id: user.sId!,
                         );
                       },
                     ),
